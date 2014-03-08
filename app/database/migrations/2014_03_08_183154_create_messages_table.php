@@ -26,6 +26,8 @@ class CreateMessagesTable extends Migration {
                 ->onDelete('cascade'); // on delete of parent, delete this record too
             $table
                 ->string('content', 200);
+            $table
+                ->timestamps();
         });
         //
     }

@@ -35,6 +35,8 @@ class CreateCommentsTable extends Migration {
                 ->onDelete('cascade'); // on delete of parent, delete this record too
             $table
                 ->text('content');
+            $table
+                ->timestamps();
         });
         //
     }
