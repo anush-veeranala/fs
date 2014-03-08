@@ -17,8 +17,6 @@ class CreateMessagesTable extends Migration {
             $table
                 ->increments('id');
             $table
-                ->string('message', 200);
-            $table
                 ->integer('user_id')
                 ->unsigned() // recommended for foreign key, in doc
                 ->index() // index is not added automaticaly for foreign key
@@ -26,6 +24,8 @@ class CreateMessagesTable extends Migration {
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade'); // on delete of parent, delete this record too
+            $table
+                ->string('content', 200);
         });
         //
     }
