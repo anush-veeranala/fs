@@ -45,7 +45,7 @@ class UsersController extends \BaseController {
                 $user->email = Input::get('email');
                 $user->password = Hash::make(Input::get('password'));
                 $user->save();
-                return Redirect::to('login')->with('message', 'Thanks for registering! Login with you r');
+                return Redirect::to('login')->with('message', 'Thanks for registering! Please login');
             }
         else
             {
