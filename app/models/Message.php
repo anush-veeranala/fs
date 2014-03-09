@@ -10,4 +10,13 @@ class Message extends Eloquent {
     {
         return $this->belongsTo('User');
     }
+
+    public static function validate($input) {
+
+        $rules = array(
+            'content' => 'Required'
+        );
+        return Validator::make($input, $rules);
+    }
+
 }
