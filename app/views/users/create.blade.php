@@ -1,16 +1,20 @@
 {{Form::open(array('route' => "users.store"))}}
 
-<ul>
+<ul class="error">
   @foreach($errors->all() as $error)
     <li>{{ $error }}</li>
   @endforeach
 </ul>
 
 {{Form::label('name', "Name: ")}}
-{{Form::text('name')}}
+{{Form::text('name', '', array(
+  'placeholder' => 'Name',
+  'required' => true))}}
 
 {{Form::label('email', "Email: ")}}
-{{Form::text('email')}}
+{{Form::text('email', '', array(
+  'placeholder' => 'Email',
+  'required' => true))}}
 
 {{Form::label('password', "Password: ")}}
 {{Form::password('password')}}

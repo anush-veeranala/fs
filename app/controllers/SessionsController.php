@@ -35,6 +35,8 @@ class SessionsController extends \BaseController {
     {
         $input = Input::all();
 
+        /* dd($input); */
+
         $attempt = Auth::attempt([
             'email' => $input['email'],
             'password' => $input['password']
@@ -57,10 +59,10 @@ class SessionsController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
-    {
-        //
-    }
+    /* public function show($id) */
+    /* { */
+    /*     // */
+    /* } */
 
     /**
      * Show the form for editing the specified resource.
@@ -68,10 +70,10 @@ class SessionsController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
-    {
-        //
-    }
+    /* public function edit($id) */
+    /* { */
+    /*     // */
+    /* } */
 
     /**
      * Update the specified resource in storage.
@@ -79,10 +81,10 @@ class SessionsController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
-    {
-        //
-    }
+    /* public function update($id) */
+    /* { */
+    /*     // */
+    /* } */
 
     /**
      * Remove the specified resource from storage.
@@ -90,8 +92,9 @@ class SessionsController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy()
     {
+        /* dd($id); */
         Auth::logout();
         return Redirect::route('login');
         //

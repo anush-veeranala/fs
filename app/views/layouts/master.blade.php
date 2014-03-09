@@ -5,6 +5,9 @@
     <meta author="Anush Veeranala">
 
     <title>The Resistance</title>
+
+    {{ HTML::style('css/main.css') }}
+
   </head>
 
   <body>
@@ -21,9 +24,11 @@
 
     <div>
       @if(Session::has('message'))
-        <p> {{ Session::get('message') }} </p>
+        <p class="notif"> {{ Session::get('message') }} </p>
       @endif
       {{ $content}}
+    </div>
+    <div class="error">
     </div>
   </body>
 </html>

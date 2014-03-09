@@ -10,10 +10,10 @@ class UsersController extends \BaseController {
      *
      * @return Response
      */
-    public function index()
-    {
-        //
-    }
+    /* public function index() */
+    /* { */
+    /*     // */
+    /* } */
 
     /**
      * Show the form for creating a new resource.
@@ -51,22 +51,6 @@ class UsersController extends \BaseController {
             {
                 return Redirect::to('signup')->with('message', 'The following errors occurred')->withErrors($v)->withInput();
             }
-
-
-
-        /* { */
-        /*     $s = $this->user->create(Input::all()); */
-
-        /*     if($s->isSaved()) */
-        /*         { */
-        /*             return Redirect::route('users.index') */
-        /*                 ->with('flash', 'The new user has been created'); */
-        /*         } */
-
-        /*     return Redirect::route('register.index') */
-        /*         ->withInput() */
-        /*         ->withErrors($s->errors()); */
-        /* } */
         //
     }
 
@@ -76,9 +60,8 @@ class UsersController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show()
     {
-
         $this->layout->content = View::make("users.show");
 
         //
@@ -90,10 +73,10 @@ class UsersController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
-    {
-        //
-    }
+    /* public function edit($id) */
+    /* { */
+    /*     // */
+    /* } */
 
     /**
      * Update the specified resource in storage.
@@ -101,10 +84,10 @@ class UsersController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
-    {
-        //
-    }
+    /* public function update($id) */
+    /* { */
+    /*     // */
+    /* } */
 
     /**
      * Remove the specified resource from storage.
@@ -112,9 +95,9 @@ class UsersController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+    /* public function destroy($id) */
+    /* { */
+    /*     // */
+    /* } */
 
 }

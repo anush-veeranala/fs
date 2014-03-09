@@ -51,3 +51,5 @@ Route::resource('users', 'UsersController', array('before' => 'notloggedin', 'on
 Route::get('login', array('before' => 'loggedin', 'as' => 'login', 'uses' => 'SessionsController@create'));
 Route::resource('sessions', 'sessionsController', array('before' => 'loggedin', 'only' => array('store')));
 Route::resource('sessions', 'sessionsController', array('before' => 'notloggedin', 'only' => array('destroy')));
+
+Route::resource('messages', 'messagesController', array('before' => 'notloggedin', 'only' => array('create', 'store')));
