@@ -7,6 +7,7 @@
     <title>The Resistance</title>
 
     {{ HTML::style('css/main.css') }}
+    {{ HTML::style('js/main.js') }}
 
   </head>
 
