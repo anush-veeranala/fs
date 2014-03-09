@@ -28,3 +28,22 @@ jQuery( document ).ready( function( $ ) {
     } );
 
 } );
+
+var All = {
+
+    newmessagepopup: function(){
+        $("#message-form-popup").show();
+    },
+    initialize: function(){
+        $(document).on("click", "#message-form-show", All.newmessagepopup);
+
+    }
+
+}
+
+
+init = function(){
+    All.initialize();
+}
+
+$(document).ready(init);

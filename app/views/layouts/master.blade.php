@@ -5,15 +5,16 @@
     <meta author="Anush Veeranala">
 
     <title>The Resistance</title>
+    {{ HTML::script('http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') }}
 
     {{ HTML::style('css/main.css') }}
-    {{ HTML::style('js/main.js') }}
-
+    {{ HTML::script('js/main.js') }}
   </head>
 
   <body>
     <div>
-         <ul>
+         <ul id="navbar">
+           <li><h1>THE RESISTANCE</h1></li>
            @if(!Auth::check())
              <li>{{ HTML::link('signup', 'SignUp') }}</li>
              <li>{{ HTML::link('login', 'Login') }}</li>

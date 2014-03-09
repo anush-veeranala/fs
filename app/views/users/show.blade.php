@@ -1,4 +1,4 @@
-<div>
+<div class="hide" id="message-form-popup">
   {{Form::open(array(
       'route' => "messages.store",
       'method' => 'post',
@@ -16,11 +16,23 @@
 
   {{Form::close()}}
 </div>
-<li>
-  {{ Form::open(array('route' => 'sessions.destroy', 'method' => 'delete')) }}
-  {{ Form::submit('Logout') }}
-  {{ Form::close() }}
-</li>
+<ul id="sidebar">
+  <li id="message-form-show">Broadcast Message</li>
+  <li>Saved Messages</li>
+  <li>
+    {{ Form::open(array('route' => 'sessions.destroy', 'method' => 'delete')) }}
+    {{ Form::submit('Logout') }}
+    {{ Form::close() }}
+  </li>
+</ul>
+
+<div class="messages">
+
+  @foreach($messages as $message)
+    {{$message->content}}
+  @endforeach
+
+</div>
 
 
 <p>Welcome {{ Auth::user()->email}}</p>

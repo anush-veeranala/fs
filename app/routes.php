@@ -14,7 +14,7 @@
 
 Route::filter('notloggedin', function()
 {
-    if (!Auth::check())
+    if (!(Auth::check()))
         {
             return Redirect::to('login');
         }

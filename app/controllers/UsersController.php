@@ -62,7 +62,9 @@ class UsersController extends \BaseController {
      */
     public function show()
     {
-        $this->layout->content = View::make("users.show");
+        $messages = Auth::user()->messages()->get();
+        /* dd($messages); */
+        $this->layout->content = View::make("users.show", array('messages' => $messages ));
 
         //
     }
