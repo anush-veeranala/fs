@@ -2,6 +2,8 @@
 
 class SessionsController extends \BaseController {
 
+    protected $layout = 'layouts.master';
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +21,8 @@ class SessionsController extends \BaseController {
      */
     public function create()
     {
-        return View::make("sessions/create");
+        $this->layout->content = View::make("sessions.create");
+        /* return View::make("sessions.create"); */
         //
     }
 
@@ -30,6 +33,13 @@ class SessionsController extends \BaseController {
      */
     public function store()
     {
+        $input = Input::all();
+
+        $attempt = Auth::attempt([
+            'email' => $input['email'],
+            'password' => $input['password']
+        ]);
+        if($attempt) return Redirect::intended('/');
         //
     }
 

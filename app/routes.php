@@ -11,6 +11,24 @@
 |
 */
 
+
+Route::filter('notloggedin', function()
+{
+    if (!Auth::check())
+        {
+            return Redirect::to('login');
+        }
+});
+
+Route::filter('loggedin', function()
+{
+    if (Auth::check())
+        {
+            return Redirect::to('users.show');
+        }
+});
+
+
 Route::get('/', function()
 {
     if (!Auth::check())
@@ -25,20 +43,11 @@ Route::get('/', function()
 });
 
 
-Route::filter('loggedin', function()
-{
-    if (!Auth::check())
-        {
-            return Redirect::to('login');
-        }
-});
+Route::get('signup', array('before' => 'loggedin', 'as' => 'signup', 'uses' => 'UsersController@create'));
+Route::resource('users', 'UsersController', array('before' => 'loggedin', 'only' => array('store')));
+Route::resource('users', 'UsersController', array('before' => 'notloggedin', 'only' => array('show')));
 
 
-Route::get('signup', array('as' => 'signup', 'uses' => 'UsersController@create'));
-Route::resource('users', 'UsersController', array('only' => array('store')));
-
-Route::resource('users', 'UsersController', array('before' => 'loggedin', 'only' => array('show')));
-
-
-Route::get('login', array('as' => 'login', 'uses' => 'SessionsController@create'));
-Route::resource('sessions', 'sessionsController', array('only' => array('store', 'destroy')));
+Route::get('login', array('before' => 'loggedin', 'as' => 'login', 'uses' => 'SessionsController@create'));
+Route::resource('sessions', 'sessionsController', array('before' => 'loggedin', 'only' => array('store')));
+Route::resource('sessions', 'sessionsController', array('before' => 'notloggedin', 'only' => array('destroy')));

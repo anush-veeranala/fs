@@ -6,7 +6,9 @@
 {{Form::label('password', "Password: ")}}
 {{Form::password('password')}}
 
-{{Form::submit()}}
+<p>
+  {{Form::submit('Login')}}
+</p>
 
 
 {{Form::close()}}
