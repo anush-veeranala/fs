@@ -1,5 +1,10 @@
 <?php
 
+
+
+Route::get('login', array('as' => 'login', 'uses' => 'UsersController@create'));
+Route::resource('user', 'UsersController', array('only' => array('store', 'show')));
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -13,5 +18,5 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+    return View::make('hello');
 });
