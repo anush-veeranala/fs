@@ -24,7 +24,7 @@ Route::filter('loggedin', function()
 {
     if (Auth::check())
         {
-            return Redirect::to('users.show');
+            return Redirect::to('users/show');
         }
 });
 
@@ -37,7 +37,7 @@ Route::get('/', function()
         }
     else
         {
-            return Redirect::to('users.show');
+            return Redirect::to('users/show');
         }
     /* return View::make('hello'); */
 });

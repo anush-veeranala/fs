@@ -14,15 +14,12 @@
              <li>{{ HTML::link('signup', 'SignUp') }}</li>
              <li>{{ HTML::link('login', 'Login') }}</li>
            @else
-             <li>{{ Form::open(array('route' => 'sessions.destroy', 'method' => 'delete')) }}
-               {{ Form::submit('Logout') }}
-               {{ Form::close() }}
-             </li>
+             <li>{{ HTML::link('users/show', 'Home') }}</li>
            @endif
          </ul>
     </div>
 
-    <div class="container">
+    <div>
       @if(Session::has('message'))
         <p> {{ Session::get('message') }} </p>
       @endif

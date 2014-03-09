@@ -78,6 +78,9 @@ class UsersController extends \BaseController {
      */
     public function show($id)
     {
+
+        $this->layout->content = View::make("users.show");
+
         //
     }
 

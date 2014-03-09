@@ -41,7 +41,7 @@ class SessionsController extends \BaseController {
         ]);
         if($attempt)
             {
-                return Redirect::intended('users.show');
+                return Redirect::intended('users/show');
             }
         else
             {
@@ -92,6 +92,8 @@ class SessionsController extends \BaseController {
      */
     public function destroy($id)
     {
+        Auth::logout();
+        return Redirect::route('login');
         //
     }
 
