@@ -62,7 +62,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('Comment');
     }
 
-    public function validate($input) {
+    public static function validate($input) {
 
         $rules = array(
             'name' => 'Required|Min:3',
@@ -70,8 +70,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             'password'  => 'Required|Confirmed|Min:3'
             /* 'admin' => 'sometimes|in:true,false' */
         );
-
         return Validator::make($input, $rules);
     }
-
 }

@@ -8,6 +8,19 @@
   </head>
 
   <body>
+    <div>
+         <ul>
+           @if(!Auth::check())
+             <li>{{ HTML::link('signup', 'SignUp') }}</li>
+             <li>{{ HTML::link('login', 'Login') }}</li>
+           @else
+             <li>{{ Form::open(array('route' => 'sessions.destroy', 'method' => 'delete')) }}
+               {{ Form::submit('Logout') }}
+               {{ Form::close() }}
+             </li>
+           @endif
+         </ul>
+    </div>
 
     <div class="container">
       @if(Session::has('message'))

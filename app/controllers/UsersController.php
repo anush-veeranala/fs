@@ -22,6 +22,7 @@ class UsersController extends \BaseController {
      */
     public function create()
     {
+        $this->layout->content = View::make("users.create");
         //
     }
 
@@ -33,7 +34,23 @@ class UsersController extends \BaseController {
     public function store()
     {
 
+        $input = Input::all();
 
+        $v = User::validate($input);
+
+        if($v->passes())
+            {
+                $user = new User;
+                $user->name = Input::get('name');
+                $user->email = Input::get('email');
+                $user->password = Hash::make(Input::get('password'));
+                $user->save();
+                return Redirect::to('login')->with('message', 'Thanks for registering! Login with you r');
+            }
+        else
+            {
+                return Redirect::to('signup')->with('message', 'The following errors occurred')->withErrors($v)->withInput();
+            }
 
 
 

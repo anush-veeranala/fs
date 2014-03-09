@@ -39,7 +39,15 @@ class SessionsController extends \BaseController {
             'email' => $input['email'],
             'password' => $input['password']
         ]);
-        if($attempt) return Redirect::intended('/');
+        if($attempt)
+            {
+                return Redirect::intended('users.show');
+            }
+        else
+            {
+                return Redirect::route('login')
+                    ->with('message', 'Incorrect Credentials!');
+            }
         //
     }
 
