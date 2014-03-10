@@ -34,7 +34,7 @@ class CreateUpVotesTable extends Migration {
             $table
                 ->timestamps();
             $table
-                ->unique('user_id', 'message_id');
+                ->unique(array('user_id', 'message_id'));
         });
         //
     }

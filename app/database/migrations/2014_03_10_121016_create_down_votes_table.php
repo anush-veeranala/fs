@@ -12,6 +12,8 @@ class CreateDownVotesTable extends Migration {
      */
     public function up()
     {
+        Schema::create('down_votes', function($table)
+        {
         $table
             ->increments('id');
         $table
@@ -32,8 +34,11 @@ class CreateDownVotesTable extends Migration {
         $table
             ->timestamps();
         $table
-            ->unique('user_id', 'message_id');
+            ->unique(array('user_id', 'message_id'));
+        /* $table */
+        /*     ->unique('user_id', 'message_id'); */
         //
+        });
     }
 
     /**
