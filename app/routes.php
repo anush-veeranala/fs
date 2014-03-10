@@ -67,3 +67,6 @@ Route::delete('up_votes', array('before' => 'notloggedin', 'as' => 'up_votes.des
 
 Route::post('down_votes', array('before' => 'notloggedin', 'as' => 'down_votes.store', 'uses' => 'DownVotesController@store'));
 Route::delete('down_votes', array('before' => 'notloggedin', 'as' => 'down_votes.destroy', 'uses' => 'DownVotesController@destroy'));
+
+Route::post('favourites', array('before' => 'notloggedin', 'as' => 'favourites.store', 'uses' => 'FavouritesController@store'));
+Route::delete('favourites', array('before' => 'notloggedin', 'as' => 'favourites.destroy', 'uses' => 'FavouritesController@destroy'));
