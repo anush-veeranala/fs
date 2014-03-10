@@ -49,3 +49,18 @@ body{
     border: 0;
     cursor: pointer;
 }
+.messages-overlay{
+    position: relative;
+}
+.messages{
+    float: left;
+}
+.message{
+    position: relative;
+}
+
+.messages img{
+    height: 100px;
+    width: 100px;
+    float: left;
+}

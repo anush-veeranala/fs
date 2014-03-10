@@ -26,12 +26,19 @@
   </li>
 </ul>
 
+<div class="message-overlay">
 <div class="messages">
 
   @foreach($messages as $message)
-    {{$message->content}}
+    <div class="message">
+      {{ HTML::image('user.png')}}
+      <div class="message-content">
+        {{$message->content}}
+      </div>
+    </div>
   @endforeach
 
+</div>
 </div>
 
 
