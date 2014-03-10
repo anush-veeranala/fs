@@ -1,23 +1,21 @@
 <?php
 
-class Message extends Eloquent {
+class Vote extends Eloquent{
 
-    public function comments()
+    public function message()
     {
-        return $this->hasMany('Comment');
+        return $this->belongsTo('Message');
     }
     public function user()
     {
         return $this->belongsTo('User');
     }
-
     public static function validate($input) {
 
         $rules = array(
-            'user_id' => 'required|digits|exists:users'
-            'content' => 'Required'
+            'user_id' => 'required|digits|exists:users,id'
+            'message_id' => 'required|digits|exists:messages,id'
         );
         return Validator::make($input, $rules);
     }
-
 }

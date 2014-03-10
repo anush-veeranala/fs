@@ -9,13 +9,11 @@
       'placeholder' => 'Message...(max length: 200 chars)',
       'maxlength' => 200,
       'required' => true))}}
-  <p>
-    {{Form::submit('Broadcast')}}
-  </p>
-
+  {{Form::submit('Broadcast')}}
 
   {{Form::close()}}
 </div>
+
 <ul id="sidebar">
   <li id="message-form-show">Broadcast Message</li>
   <li>Saved Messages</li>
@@ -27,19 +25,35 @@
 </ul>
 
 <div class="message-overlay">
-<div class="messages">
+  <div class="messages">
 
-  @foreach($messages as $message)
-    <div class="message">
-      {{ HTML::image('user.png')}}
-      <div class="message-content">
-        {{$message->content}}
+    @foreach($messages as $message)
+      <div class="message">
+        {{ HTML::image('user.png')}}
+        <div class="message-content">
+          {{$message->content}}
+          {{$message->created_at}}
+        </div>
+
+
+        <span> Save Message </span>
+        <span> Add Comment</span>
+        <span> Hide Comments</span>
+
+        {{Form::open(array(
+            'route' => "comments.store",
+            'method' => 'post'))}}
+
+        {{Form::label('content', "Comment: ")}}
+        {{Form::textarea('content', '', array(
+            'placeholder' => 'Message...(max length: 200 chars)',
+            'maxlength' => 200,
+            'required' => true))}}
+        {{Form::hidden('message_id', $message->id)}}
+        {{Form::submit('Comment')}}
+
+
       </div>
-    </div>
-  @endforeach
-
+    @endforeach
+  </div>
 </div>
-</div>
-
-
-<p>Welcome {{ Auth::user()->email}}</p>

@@ -1,6 +1,6 @@
 <?php
 
-class Comment extends Eloquent{
+class Vote extends Eloquent{
 
     public function message()
     {
@@ -15,7 +15,7 @@ class Comment extends Eloquent{
         $rules = array(
             'user_id' => 'required|digits|exists:users,id'
             'message_id' => 'required|digits|exists:messages,id'
-            'content' => 'Required'
+            'up' => 'Required|in:true,false'
         );
         return Validator::make($input, $rules);
     }
