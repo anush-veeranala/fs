@@ -62,12 +62,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('Comment');
     }
 
+    public function favourites()
+    {
+        return $this->hasManyThrough('Message','Favourite');
+    }
+
     public static function validate($input) {
 
         $rules = array(
-            'name' => 'Required|Min:3',
+            'name' => 'Required',
             'email'     => 'Required|Email|Unique:users',
-            'password'  => 'Required|Confirmed|Min:3'
+            'password'  => 'Required|Confirmed'
             'admin' => 'sometimes|in:true,false'
         );
         return Validator::make($input, $rules);
