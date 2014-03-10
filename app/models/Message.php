@@ -14,8 +14,9 @@ class Message extends Eloquent {
     public static function validate($input) {
 
         $rules = array(
-            'user_id' => 'required|digits|exists:users,id'
-            'content' => 'Required|size:200'
+            /* 'user_id' => 'required|digits|exists:users,id', */
+            'user_id' => 'required|integer|exists:users,id',
+            'content' => 'required|max:200'
         );
         return Validator::make($input, $rules);
     }

@@ -13,8 +13,8 @@ class Vote extends Eloquent{
     public static function validate($input) {
 
         $rules = array(
-            'user_id' => 'required|digits|exists:users,id'
-            'message_id' => 'required|digits|exists:messages,id'
+            'user_id' => 'required|integers|exists:users,id',
+            'message_id' => 'required|integers|exists:messages,id'
         );
         return Validator::make($input, $rules);
     }

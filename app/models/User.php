@@ -72,7 +72,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         $rules = array(
             'name' => 'Required',
             'email'     => 'Required|Email|Unique:users',
-            'password'  => 'Required|Confirmed'
+            'password'  => 'Required|Confirmed',
             'admin' => 'sometimes|in:true,false'
         );
         return Validator::make($input, $rules);

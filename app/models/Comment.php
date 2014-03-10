@@ -13,9 +13,9 @@ class Comment extends Eloquent{
     public static function validate($input) {
 
         $rules = array(
-            'user_id' => 'required|digits|exists:users,id'
-            'message_id' => 'required|digits|exists:messages,id'
-            'content' => 'Required'
+            'user_id' => 'required|integer|exists:users,id',
+            'message_id' => 'required|integer|exists:messages,id',
+            'content' => 'required'
         );
         return Validator::make($input, $rules);
     }
