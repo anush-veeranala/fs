@@ -54,6 +54,7 @@ Route::get('/', function()
 Route::get('signup', array('before' => 'loggedin', 'as' => 'signup', 'uses' => 'UsersController@create'));
 Route::post('users', array('before' => 'loggedin', 'as' => 'users.store', 'uses' => 'UsersController@store'));
 Route::get('users/show', array('before' => 'notloggedin', 'as' => 'show', 'uses' => 'UsersController@show'));
+Route::get('users/saved', array('before' => 'notloggedin', 'as' => 'saved', 'uses' => 'UsersController@saved'));
 
 Route::get('login', array('before' => 'loggedin', 'as' => 'login', 'uses' => 'SessionsController@create'));
 Route::post('sessions', array('before' => 'loggedin', 'as' => 'sessions.store', 'uses' => 'SessionsController@store'));
