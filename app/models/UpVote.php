@@ -1,6 +1,6 @@
 <?php
 
-class Vote extends Eloquent{
+class UpVote extends Eloquent{
 
     public function message()
     {
