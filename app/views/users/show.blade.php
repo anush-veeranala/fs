@@ -25,15 +25,25 @@
   </li>
 </ul>
 
+
+
+
 <div class="message-overlay">
   <div class="messages">
 
     @foreach($messages as $message)
+
+
+      @if ($message->user->admin)
+      @endif
+
+
       <div class="message">
         {{ HTML::image('user.png')}}
+        {{ $message->user->name }}
+        {{ $message->created_at }}
         <div class="message-content">
           {{$message->content}}
-          {{$message->created_at}}
         </div>
 
 
@@ -62,7 +72,7 @@
           {{ Form::close() }}
 
         @endif
-        <span>  </span>
+        <span> {{ UpVote::where('message_id', $message->id)->count() }} </span>
 
 
         @if ($down_vote = DB::table('down_votes')->where('message_id', $message->id)->where('user_id', Auth::user()->id)->first())
@@ -90,7 +100,7 @@
           {{ Form::close() }}
 
         @endif
-        <span>  </span>
+        <span> {{ DownVote::where('message_id', $message->id)->count() }} </span>
 
 
         <span> Save Message </span>
@@ -110,6 +120,12 @@
         {{Form::submit('Comment')}}
         {{ Form::close() }}
 
+
+        @foreach($message->comments as $comment)
+          {{ $comment->user->name}}
+          {{ $comment->created_at}}
+          {{ $comment->content }}
+        @endforeach
 
       </div>
     @endforeach

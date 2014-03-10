@@ -16,7 +16,7 @@ class CommentsController extends \BaseController {
      * Show the form for creating a new resource.
      *
      * @return Response
-    /*  *\/ */
+     /*  *\/ */
     /* public function create() */
     /* { */
     /*  // */
@@ -34,23 +34,37 @@ class CommentsController extends \BaseController {
                 'msg' => 'Unauthorized attempt to create setting'
             ) );
         }
+        $user = Auth::user();
+        Input::merge(array('user_id' => $user->id));
         $input = Input::all();
 
         $v = Comment::validate($input);
 
         if($v->passes())
             {
-                $message = new Message;
-                $message->content = Input::get('content');
-                $user = Auth::user();
-                $message = $user->messages()->save($message);
+                $comment = new Comment;
+                $comment->content = Input::get('content');
+                $comment->user()->associate($user);
+                $message = Message::find(Input::get('message_id'));
+                $comment->message()->associate($message);
+                $comment->save();
                 $response = array(
                     'status' => 'success',
                     'msg' => 'Setting created successfully',
                 );
 
-                return Response::json( $response );
+                /* return Response::json( $response ); */
             }
+        else
+            {
+                /* dd($input); */
+                /* dd($v->messages()); */
+                $response = array(
+                    'status' => 'failure',
+                    'msg' => 'Wrong Values received'
+                );
+            }
+        return Response::json( $response );
 
         //
     }
