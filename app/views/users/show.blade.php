@@ -103,6 +103,34 @@
         <span> {{ DownVote::where('message_id', $message->id)->count() }} </span>
 
 
+        @if ($saved = DB::table('favourites')->where('message_id', $message->id)->where('user_id', Auth::user()->id)->first())
+        @endif
+
+        @if ($saved === NULL)
+
+          {{ Form::open(array(
+              'route' => 'favourites.store',
+              'method' => 'post',
+              'class' => 'add-favourite'
+            )) }}
+          {{ Form::hidden('message_id', $message->id) }}
+          {{ Form::submit('Save Message') }}
+          {{ Form::close() }}
+
+        @else
+
+          {{ Form::open(array('route' => array('favourites.destroy', $saved->id),
+                              'method' => 'delete',
+                              'class' => 'remove-favourite')) }}
+          {{ Form::hidden('favourite_id', $saved->id) }}
+          <!-- here -->
+          {{ Form::submit('Remove from saved') }}
+          {{ Form::close() }}
+
+        @endif
+
+
+
         <span> Save Message </span>
         <span> Add Comment</span>
         <span> Hide Comments</span>
