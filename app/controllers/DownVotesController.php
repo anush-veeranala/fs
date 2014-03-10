@@ -1,6 +1,6 @@
 <?php
 
-class UpVotesController extends \BaseController {
+class DownVotesController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class UpVotesController extends \BaseController {
      */
     /* public function create() */
     /* { */
-    /*  // */
+    /*     // */
     /* } */
 
     /**
@@ -39,16 +39,16 @@ class UpVotesController extends \BaseController {
         Input::merge(array('user_id' => $user->id));
         $input = Input::all();
 
-        $v = UpVote::validate($input);
+        $v = DownVote::validate($input);
 
         if($v->passes())
             {
-                $up_vote = new UpVote;
-                $up_vote->user()->associate($user);
+                $down_vote = new DownVote;
+                $down_vote->user()->associate($user);
                 $message = Message::find(Input::get('message_id'));
-                $up_vote->message()->associate($message);
+                $down_vote->message()->associate($message);
 
-                if ($up_vote->save()){
+                if ($down_vote->save()){
                     $response = array(
                         'status' => 'success',
                         'msg' => 'Message Broadcasted.'
@@ -85,7 +85,7 @@ class UpVotesController extends \BaseController {
      */
     /* public function show($id) */
     /* { */
-    /*  // */
+    /*     // */
     /* } */
 
     /**
@@ -96,7 +96,7 @@ class UpVotesController extends \BaseController {
      */
     /* public function edit($id) */
     /* { */
-    /*  // */
+    /*     // */
     /* } */
 
     /**
@@ -107,7 +107,7 @@ class UpVotesController extends \BaseController {
      */
     /* public function update($id) */
     /* { */
-    /*  // */
+    /*     // */
     /* } */
 
     /**
@@ -116,13 +116,6 @@ class UpVotesController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-          /* <button type="submit" href="{{ URL::route('up_votes.destroy', $up_vote->id) }}" class="btn btn-danger btn-mini">Delete</button>button> */
-          /* {{ Form::close() }} */
-
-
-          /* {{ Form::open(array('method' => 'delete', 'action' => array('UpVotesController@destroy', $up_vote->id ))) }} */
-
-
     public function destroy()
     {
         if ( Session::token() !== Input::get( '_token' ) ) {
@@ -130,10 +123,11 @@ class UpVotesController extends \BaseController {
                 'msg' => 'Unauthorized attempt to create setting'
             ) );
         }
-        $v = UpVote::find(Input::get('up_vote_id'));
+        $v = DownVote::find(Input::get('down_vote_id'));
         $v->delete();
 
-     //
+
+        //
     }
 
 }

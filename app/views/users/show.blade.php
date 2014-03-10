@@ -62,6 +62,35 @@
           {{ Form::close() }}
 
         @endif
+        <span>  </span>
+
+
+        @if ($down_vote = DB::table('down_votes')->where('message_id', $message->id)->where('user_id', Auth::user()->id)->first())
+        @endif
+
+        @if ($down_vote === NULL)
+
+          {{ Form::open(array(
+              'route' => 'down_votes.store',
+              'method' => 'post',
+              'class' => 'down-vote'
+            )) }}
+          {{ Form::hidden('message_id', $message->id) }}
+          {{ Form::submit('Down Vote') }}
+          {{ Form::close() }}
+
+        @else
+
+          {{ Form::open(array('route' => array('down_votes.destroy', $down_vote->id),
+                              'method' => 'delete',
+                              'class' => 'remove-down-vote')) }}
+          {{ Form::hidden('down_vote_id', $down_vote->id) }}
+          <!-- here -->
+          {{ Form::submit('DOWN VOTED') }}
+          {{ Form::close() }}
+
+        @endif
+        <span>  </span>
 
 
         <span> Save Message </span>
