@@ -64,7 +64,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     public function favourites()
     {
-        return $this->hasManyThrough('Message','Favourite');
+        return $this->belongsToMany('Message', 'favourites', 'user_id', 'message_id');
     }
 
     public static function validate($input) {

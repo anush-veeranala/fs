@@ -17,6 +17,7 @@
 
 <ul id="sidebar">
   <li id="message-form-show">Broadcast Message</li>
+  <li> {{ HTML::link('users/saved', 'Saved Messages') }} </li>
   <li>Saved Messages</li>
   <li>
     {{ Form::open(array('route' => 'sessions.destroy', 'method' => 'delete')) }}
@@ -130,8 +131,6 @@
         @endif
 
 
-
-        <span> Save Message </span>
         <span> Add Comment</span>
         <span> Hide Comments</span>
 

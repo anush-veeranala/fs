@@ -72,7 +72,8 @@ class UsersController extends \BaseController {
 
     public function saved()
     {
-        $messages = Auth::user()->favourites()->get();
+        $messages = Auth::user()->favourites;
+        /* dd($messages); */
         /* $vote_count = Vote::votescount(); */
         /* dd($messages); */
         $this->layout->content = View::make("users.saved", array('messages' => $messages ));
