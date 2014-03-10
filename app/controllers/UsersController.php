@@ -63,7 +63,7 @@ class UsersController extends \BaseController {
     public function show()
     {
         $messages = Auth::user()->messages()->get();
-        $vote_count = Vote::votescount();
+        /* $vote_count = Vote::votescount(); */
         /* dd($messages); */
         $this->layout->content = View::make("users.show", array('messages' => $messages ));
 

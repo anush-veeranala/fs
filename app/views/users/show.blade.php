@@ -35,6 +35,19 @@
           {{$message->created_at}}
         </div>
 
+        @if (DB::table('up_votes')->where('message_id', $message->id)->where('user_id', Auth::user()->id)->first() === NULL)
+          {
+          {{ Form::open(array('route' => 'up_votes.store', 'method' => 'post')) }}
+          {{ Form::submit('Up Vote') }}
+          {{ Form::close() }}
+          }
+        @else
+          {
+          {{ Form::open(array('route' => 'up_votes.destroy', 'method' => 'delete')) }}
+          {{ Form::submit('UP VOTED') }}
+          {{ Form::close() }}
+          }
+        @endif
 
 
 
