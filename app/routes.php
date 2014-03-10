@@ -62,7 +62,8 @@ Route::delete('sessions', array('before' => 'notloggedin', 'as' => 'sessions.des
 Route::post('messages', array('before' => 'notloggedin', 'as' => 'messages.store', 'uses' => 'MessagesController@store'));
 Route::post('comments', array('before' => 'notloggedin', 'as' => 'comments.store', 'uses' => 'CommentsController@store'));
 
-Route::post('votes', array('before' => 'notloggedin', 'as' => 'votes.store', 'uses' => 'VotesController@store'));
-Route::put('votes', array('before' => 'notloggedin', 'as' => 'votes.update', 'uses' => 'VotesController@update'));
-Route::patch('votes', array('before' => 'notloggedin', 'uses' => 'VotesController@update'));
-Route::delete('votes', array('before' => 'notloggedin', 'as' => 'votes.destroy', 'uses' => 'VotesController@destroy'));
+Route::post('up_votes', array('before' => 'notloggedin', 'as' => 'up_votes.store', 'uses' => 'UpVotesController@store'));
+Route::delete('up_votes', array('before' => 'notloggedin', 'as' => 'up_votes.destroy', 'uses' => 'UpVotesController@destroy'));
+
+Route::post('down_votes', array('before' => 'notloggedin', 'as' => 'down_votes.store', 'uses' => 'DownVotesController@store'));
+Route::delete('down_votes', array('before' => 'notloggedin', 'as' => 'down_votes.destroy', 'uses' => 'DownVotesController@destroy'));
