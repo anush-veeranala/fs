@@ -43,6 +43,7 @@ Route::get('/', function()
 });
 
 
+/* Route::resource('users', 'UsersController'); */
 /* Route::resource('users', 'UsersController', array('before' => 'loggedin', 'only' => array('store'))); */
 /* Route::resource('users', 'UsersController', array('before' => 'notloggedin', 'only' => array('show'))); */
 /* Route::resource('sessions', 'sessionsController', array('before' => 'loggedin', 'only' => array('store'))); */
@@ -60,3 +61,8 @@ Route::delete('sessions', array('before' => 'notloggedin', 'as' => 'sessions.des
 
 Route::post('messages', array('before' => 'notloggedin', 'as' => 'messages.store', 'uses' => 'MessagesController@store'));
 Route::post('comments', array('before' => 'notloggedin', 'as' => 'comments.store', 'uses' => 'CommentsController@store'));
+
+Route::post('votes', array('before' => 'notloggedin', 'as' => 'votes.store', 'uses' => 'VotesController@store'));
+Route::put('votes', array('before' => 'notloggedin', 'as' => 'votes.update', 'uses' => 'VotesController@update'));
+Route::patch('votes', array('before' => 'notloggedin', 'uses' => 'VotesController@update'));
+Route::delete('votes', array('before' => 'notloggedin', 'as' => 'votes.destroy', 'uses' => 'VotesController@destroy'));
