@@ -8,7 +8,8 @@
   {{Form::textarea('content', '', array(
       'placeholder' => 'Message...(max length: 200 chars)',
       'maxlength' => 200,
-      'required' => true))}}
+      'required' => true,
+      'id' => 'content'))}}
   {{Form::submit('Broadcast')}}
 
   {{Form::close()}}
@@ -35,21 +36,32 @@
           {{$message->created_at}}
         </div>
 
-        @if (DB::table('up_votes')->where('message_id', $message->id)->where('user_id', Auth::user()->id)->first() === NULL)
-          {
-          {{ Form::open(array('route' => 'up_votes.store', 'method' => 'post')) }}
-          {{ Form::submit('Up Vote') }}
-          {{ Form::close() }}
-          }
-        @else
-          {
-          {{ Form::open(array('route' => 'up_votes.destroy', 'method' => 'delete')) }}
-          {{ Form::submit('UP VOTED') }}
-          {{ Form::close() }}
-          }
+
+        @if ($up_vote = DB::table('up_votes')->where('message_id', $message->id)->where('user_id', Auth::user()->id)->first())
         @endif
 
+        @if ($up_vote === NULL)
 
+          {{ Form::open(array(
+              'route' => 'up_votes.store',
+              'method' => 'post',
+              'class' => 'up-vote'
+            )) }}
+          {{ Form::hidden('message_id', $message->id) }}
+          {{ Form::submit('Up Vote') }}
+          {{ Form::close() }}
+
+        @else
+
+          {{ Form::open(array('route' => array('up_votes.destroy', $up_vote->id),
+                              'method' => 'delete',
+                              'class' => 'remove-up-vote')) }}
+          {{ Form::hidden('up_vote_id', $up_vote->id) }}
+          <!-- here -->
+          {{ Form::submit('UP VOTED') }}
+          {{ Form::close() }}
+
+        @endif
 
 
         <span> Save Message </span>
@@ -67,6 +79,7 @@
             'required' => true))}}
         {{Form::hidden('message_id', $message->id)}}
         {{Form::submit('Comment')}}
+        {{ Form::close() }}
 
 
       </div>
