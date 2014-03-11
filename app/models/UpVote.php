@@ -18,4 +18,11 @@ class UpVote extends Eloquent{
         );
         return Validator::make($input, $rules);
     }
+    public static function user_upvote($message_id){
+        return UpVote::where('message_id', $message_id)->where('user_id', Auth::user()->id)->first();
+    }
+    public static function upvote_count($message_id){
+        return UpVote::where('message_id', $message_id)->count();
+    }
+
 }

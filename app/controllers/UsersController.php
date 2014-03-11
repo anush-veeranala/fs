@@ -76,7 +76,7 @@ class UsersController extends \BaseController {
         /* dd($messages); */
         /* $vote_count = Vote::votescount(); */
         /* dd($messages); */
-        $this->layout->content = View::make("users.saved", array('messages' => $messages ));
+        $this->layout->content = View::make("users.show", array('messages' => $messages ));
 
         //
     }

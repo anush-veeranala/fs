@@ -18,4 +18,8 @@ class Favourite extends Eloquent{
         );
         return Validator::make($input, $rules);
     }
+    public static function user_favourite($message_id){
+        return Favourite::where('message_id', $message_id)->where('user_id', Auth::user()->id)->first();
+    }
+
 }

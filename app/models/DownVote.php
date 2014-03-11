@@ -18,4 +18,10 @@ class DownVote extends Eloquent{
         );
         return Validator::make($input, $rules);
     }
+    public static function user_downvote($message_id){
+        return DownVote::where('message_id', $message_id)->where('user_id', Auth::user()->id)->first();
+    }
+    public static function downvote_count($message_id){
+        return DownVote::where('message_id', $message_id)->count();
+    }
 }
