@@ -210,11 +210,43 @@ jQuery( document ).ready( function( $ ) {
 
 var All = {
 
+
+
+    longpoll: function waitForMsg() {
+        /* This requests the url "msgsrv.php"
+           When it complete (or errors)*/
+        $.ajax({
+            type: "GET",
+            url: "/messages/checkin_poll",
+
+            async: true, /* If set to non-async, browser shows page as "Loading.."*/
+            cache: false,
+            timeout:50000, /* Timeout in ms */
+
+            success: function(data){ /* called when request to barge.php completes */
+                addmsg("new", data); /* Add response to a .msg div (with the "new" class)*/
+                setTimeout(
+                    waitForMsg, /* Request next message */
+                    1000 /* ..after 1 seconds */
+                );
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                addmsg("error", textStatus + " (" + errorThrown + ")");
+                setTimeout(
+                    waitForMsg, /* Try again after.. */
+                    15000); /* milliseconds (15seconds) */
+            }
+        });
+
+    },
+
+
     newmessagepopup: function(){
         $("#message-form-popup").show();
     },
     initialize: function(){
         $(document).on("click", "#message-form-show", All.newmessagepopup);
+        All.longpoll();
 
     }
 

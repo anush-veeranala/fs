@@ -2,6 +2,41 @@
 
 class MessagesController extends \BaseController {
 
+    public function get_checkin_poll()
+    {
+        session_write_close();
+        session_start();
+        MessagesController::longpoll();
+
+        return View::make('partials.messages')->with('messages', $messages);
+
+        /* $new = Message::where() */
+        /* return Response::json($json); */
+    }
+
+    public static function longpoll()
+    {
+        $time = date('Y-m-d H:i:s',time());
+        while(1)
+            {
+                $messages = Message::where('created_at','>','time()')->get();
+
+                if ($messages->isEmpty())
+                    {
+                        sleep(10);
+                        dd("here");
+
+                    }
+                else
+                    {
+                        break;
+                    }
+            }
+
+        return $messages;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +66,7 @@ class MessagesController extends \BaseController {
     {
         if ( Session::token() !== Input::get( '_token' ) ) {
             return Response::json( array(
-                            'msg' => 'Unauthorized attempt to create setting'
+                'msg' => 'Unauthorized attempt to create setting'
             ) );
         }
         $user = Auth::user();
@@ -46,11 +81,11 @@ class MessagesController extends \BaseController {
                 $message->content = Input::get('content');
                 $message->user()->associate($user);
                 if ($message->save()){
-                        $response = array(
-                            'status' => 'success',
-                            'msg' => 'Message Broadcasted.'
-                        );
-                    }
+                    $response = array(
+                        'status' => 'success',
+                        'msg' => 'Message Broadcasted.'
+                    );
+                }
                 else
                     {
                         $response = array(
