@@ -32,11 +32,16 @@
   <div class="messages">
 
     @foreach($messages as $message)
-
-
       @if ($message->user->admin)
-      @endif
 
+
+
+      @else
+
+
+
+
+      @endif
 
       <div class="message">
         {{ HTML::image('user.png')}}

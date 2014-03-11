@@ -1,4 +1,5 @@
-{{Form::open(array('route' => "users.store"))}}
+{{Form::open(array('route' => "users.store",
+                   'method' => 'post'))}}
 
 <ul class="error">
   @foreach($errors->all() as $error)
@@ -12,7 +13,7 @@
   'required' => true))}}
 
 {{Form::label('email', "Email: ")}}
-{{Form::text('email', '', array(
+{{Form::email('email', '', array(
   'placeholder' => 'Email',
   'required' => true))}}
 

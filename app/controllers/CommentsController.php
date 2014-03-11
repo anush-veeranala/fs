@@ -50,7 +50,8 @@ class CommentsController extends \BaseController {
                 $comment->save();
                 $response = array(
                     'status' => 'success',
-                    'msg' => 'Setting created successfully',
+                    'msg' => $comment->created_at
+                    /* 'msg' => 'Setting created successfully', */
                 );
 
                 /* return Response::json( $response ); */

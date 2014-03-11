@@ -1,7 +1,7 @@
 {{Form::open(array('route' => "sessions.store"))}}
 
 {{Form::label('email', "Email: ")}}
-{{Form::text('email', '', array(
+{{Form::email('email', '', array(
   'placeholder' => 'Email',
   'required' => true))}}
 
