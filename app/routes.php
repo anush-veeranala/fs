@@ -74,4 +74,4 @@ Route::delete('favourites', array('before' => 'notloggedin', 'as' => 'favourites
 
 
 // Long Polling
-Route::get('messages/checkin_poll', array('before' => 'notloggedin', 'uses' => 'MessagesController@get_checkin_poll'));
+/* Route::get('messages/checkin_poll', array('before' => 'notloggedin', 'uses' => 'MessagesController@get_checkin_poll')); */

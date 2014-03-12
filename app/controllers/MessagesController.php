@@ -2,39 +2,39 @@
 
 class MessagesController extends \BaseController {
 
-    public function get_checkin_poll()
-    {
-        session_write_close();
-        session_start();
-        MessagesController::longpoll();
+    /* public function get_checkin_poll() */
+    /* { */
+    /*     session_write_close(); */
+    /*     session_start(); */
+    /*     MessagesController::longpoll(); */
 
-        return View::make('partials.messages')->with('messages', $messages);
+    /*     return View::make('partials.messages')->with('messages', $messages); */
 
-        /* $new = Message::where() */
-        /* return Response::json($json); */
-    }
+    /*     /\* $new = Message::where() *\/ */
+    /*     /\* return Response::json($json); *\/ */
+    /* } */
 
-    public static function longpoll()
-    {
-        $time = date('Y-m-d H:i:s',time());
-        while(1)
-            {
-                $messages = Message::where('created_at','>','time()')->get();
+    /* public static function longpoll() */
+    /* { */
+    /*     $time = date('Y-m-d H:i:s',time()); */
+    /*     while(1) */
+    /*         { */
+    /*             $messages = Message::where('created_at','>','time()')->get(); */
 
-                if ($messages->isEmpty())
-                    {
-                        sleep(10);
-                        dd("here");
+    /*             if ($messages->isEmpty()) */
+    /*                 { */
+    /*                     sleep(10); */
+    /*                     dd("here"); */
 
-                    }
-                else
-                    {
-                        break;
-                    }
-            }
+    /*                 } */
+    /*             else */
+    /*                 { */
+    /*                     break; */
+    /*                 } */
+    /*         } */
 
-        return $messages;
-    }
+    /*     return $messages; */
+    /* } */
 
 
     /**
