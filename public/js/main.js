@@ -212,33 +212,33 @@ var All = {
 
 
 
-    longpoll: function waitForMsg() {
-        /* This requests the url "msgsrv.php"
-           When it complete (or errors)*/
-        $.ajax({
-            type: "GET",
-            url: "/messages/checkin_poll",
+    // longpoll: function waitForMsg() {
+    //     /* This requests the url "msgsrv.php"
+    //        When it complete (or errors)*/
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/messages/checkin_poll",
 
-            async: true, /* If set to non-async, browser shows page as "Loading.."*/
-            cache: false,
-            timeout:50000, /* Timeout in ms */
+    //         async: true, /* If set to non-async, browser shows page as "Loading.."*/
+    //         cache: false,
+    //         timeout:50000, /* Timeout in ms */
 
-            success: function(data){ /* called when request to barge.php completes */
-                addmsg("new", data); /* Add response to a .msg div (with the "new" class)*/
-                setTimeout(
-                    waitForMsg, /* Request next message */
-                    1000 /* ..after 1 seconds */
-                );
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown){
-                addmsg("error", textStatus + " (" + errorThrown + ")");
-                setTimeout(
-                    waitForMsg, /* Try again after.. */
-                    15000); /* milliseconds (15seconds) */
-            }
-        });
+    //         success: function(data){ /* called when request to barge.php completes */
+    //             addmsg("new", data); /* Add response to a .msg div (with the "new" class)*/
+    //             setTimeout(
+    //                 waitForMsg, /* Request next message */
+    //                 1000 /* ..after 1 seconds */
+    //             );
+    //         },
+    //         error: function(XMLHttpRequest, textStatus, errorThrown){
+    //             addmsg("error", textStatus + " (" + errorThrown + ")");
+    //             setTimeout(
+    //                 waitForMsg, /* Try again after.. */
+    //                 15000); /* milliseconds (15seconds) */
+    //         }
+    //     });
 
-    },
+    // },
 
 
     newmessagepopup: function(){
@@ -246,7 +246,7 @@ var All = {
     },
     initialize: function(){
         $(document).on("click", "#message-form-show", All.newmessagepopup);
-        All.longpoll();
+        // All.longpoll();
 
     }
 
@@ -258,3 +258,20 @@ init = function(){
 }
 
 $(document).ready(init);
+
+    var conn = new ab.Session(
+            'ws://localhost:8080' // The host (our Ratchet WebSocket server) to connect to
+          , function() {            // Once the connection has been established
+              conn.subscribe('resistance', function(topic, data) {
+                  // This is where you would add the new article to the DOM (beyond the scope of this tutorial)
+
+                  console.log('New article published to category "' + topic + '" : ' + data);
+              });
+          }
+        , function() {            // When the connection is closed
+            console.warn('WebSocket connection closed');
+        }
+        , {                       // Additional parameters, we're ignoring the WAMP sub-protocol for older browsers
+            'skipSubprotocolCheck': true
+        }
+    );
