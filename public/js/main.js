@@ -37,21 +37,12 @@ var All = {
     initialize: function(){
         // $(document).on("click", "#message-form-show", All.newmessagepopup);
         // All.longpoll();
-        $('#close').on('click',function(e){
-            triggers.eq(0).overlay().close();
-        });
+
         $('.close').on('click',function(e){
             var $elem = $(this);
             $elem.parent().parent().find('.add-comment').overlay().close();
         });
 
-        var triggers = $('#message-form-show').overlay({
-            mask: {
-                color: '#ccc',
-                top: 100
-            },
-            closeOnClick:false
-        });
         $('.add-comment').overlay({
             mask: {
                 color: '#ccc',
@@ -82,8 +73,18 @@ init = function(){
 $(document).ready(init);
 
 jQuery( document ).ready( function( $ ) {
+    var triggers = $('#message-form-show').overlay({
+        mask: {
+            color: '#ccc',
+            top: 100
+        },
+        closeOnClick:false
+    });
+    $('#close').on('click',function(e){
+        triggers.eq(0).overlay().close();
+    });
 
-    $( '#message-form' ).on( 'submit', function() {
+    $( '#message-form' ).on( 'submit', function(e) {
 
 
         //.....
