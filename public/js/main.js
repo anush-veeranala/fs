@@ -2,10 +2,11 @@ jQuery( document ).ready( function( $ ) {
 
     $( '#message-form' ).on( 'submit', function() {
 
+
         //.....
         //show some spinner etc to indicate operation in progress
         //.....
-
+        triggers.eq(0).overlay().close();
         $.post(
             $( this ).prop( 'action' ),
             {
@@ -18,13 +19,16 @@ jQuery( document ).ready( function( $ ) {
             },
             'json'
         );
-
         //.....
         //do anything else you might want to do
         //.....
 
         //prevent the form from actually submitting in browser
-        return false;
+        // alert("came here");
+        // return false;
+        return defaultPrevented();
+        // return e.preventDefault();
+
     } );
 
     $( '.up-vote' ).on( 'submit', function() {
@@ -241,12 +245,44 @@ var All = {
     // },
 
 
-    newmessagepopup: function(){
-        $("#message-form-popup").show();
-    },
+    // newmessagepopup: function(){
+    //     $("#message-form-popup").show();
+    // },
     initialize: function(){
-        $(document).on("click", "#message-form-show", All.newmessagepopup);
+        // $(document).on("click", "#message-form-show", All.newmessagepopup);
         // All.longpoll();
+        $('#close').on('click',function(e){
+            triggers.eq(0).overlay().close();
+        });
+        $('.close').on('click',function(e){
+            var $elem = $(this);
+            $elem.parent().parent().find('.add-comment').overlay().close();
+        });
+
+        var triggers = $('#message-form-show').overlay({
+            mask: {
+                color: '#ccc',
+                top: 100
+            },
+            closeOnClick:false
+        });
+        $('.add-comment').overlay({
+            mask: {
+                color: '#ccc',
+                top: 100
+            },
+            closeOnClick: false
+        });
+        $('.add-comment-form').on('submit',function(e){
+            var $elem = $(this).parent().parent().find('.add-comment');
+            $elem.overlay().close();
+            $.post(
+                $(this).prop('action'),$(this).serialize(), function(data) {
+
+                }
+            );
+            return e.preventDefault();
+        });
 
     }
 
@@ -259,19 +295,19 @@ init = function(){
 
 $(document).ready(init);
 
-    var conn = new ab.Session(
-            'ws://localhost:8080' // The host (our Ratchet WebSocket server) to connect to
-          , function() {            // Once the connection has been established
-              conn.subscribe('resistance', function(topic, data) {
-                  // This is where you would add the new article to the DOM (beyond the scope of this tutorial)
+var conn = new ab.Session(
+    'ws://localhost:8080' // The host (our Ratchet WebSocket server) to connect to
+    , function() {            // Once the connection has been established
+        conn.subscribe('resistance', function(topic, data) {
+            // This is where you would add the new article to the DOM (beyond the scope of this tutorial)
 
-                  console.log('New article published to category "' + topic + '" : ' + data);
-              });
-          }
-        , function() {            // When the connection is closed
-            console.warn('WebSocket connection closed');
-        }
-        , {                       // Additional parameters, we're ignoring the WAMP sub-protocol for older browsers
-            'skipSubprotocolCheck': true
-        }
-    );
+            console.log('New article published to category "' + topic + '" : ' + data);
+        });
+    }
+    , function() {            // When the connection is closed
+        console.warn('WebSocket connection closed');
+    }
+    , {                       // Additional parameters, we're ignoring the WAMP sub-protocol for older browsers
+        'skipSubprotocolCheck': true
+    }
+);

@@ -7,7 +7,7 @@
     <title>The Resistance</title>
     {{ HTML::script('http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') }}
     {{ HTML::script('http://autobahn.s3.amazonaws.com/js/autobahn.min.js') }}
-
+    {{ HTML::script('js/jquery.tools.min.js') }}
     {{ HTML::style('css/main.css') }}
     {{ HTML::script('js/main.js') }}
   </head>
