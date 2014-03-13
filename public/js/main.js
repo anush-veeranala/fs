@@ -251,7 +251,7 @@ jQuery( document ).ready( function( $ ) {
                 // "setting_value": $( '#setting_value' ).val()
             },
             function( data ) {
-                $(this).replaceWith(data);
+                $(".add-favourite").replaceWith(data);
                 //do something with data/response returned by server
             },
             'json'

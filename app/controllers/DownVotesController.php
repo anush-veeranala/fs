@@ -49,10 +49,12 @@ class DownVotesController extends \BaseController {
                 $down_vote->message()->associate($message);
 
                 if ($down_vote->save()){
-                    $response = array(
-                        'status' => 'success',
-                        'msg' => 'Message Broadcasted.'
-                    );
+                    $response = View::make('partials.remove_down_vote')->with('down_vote', $down_vote);
+                    return $response;
+                    /* $response = array( */
+                    /*     'status' => 'success', */
+                    /*     'msg' => 'Message Broadcasted.' */
+                    /* ); */
                 }
                 else
                     {
@@ -124,7 +126,10 @@ class DownVotesController extends \BaseController {
             ) );
         }
         $v = DownVote::find(Input::get('down_vote_id'));
+        $message = $v->message;
+        $response = View::make('partials.down_vote')->with('message', $message);
         $v->delete();
+        return $response;
 
 
         //

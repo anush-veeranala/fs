@@ -49,10 +49,12 @@ class UpVotesController extends \BaseController {
                 $up_vote->message()->associate($message);
 
                 if ($up_vote->save()){
-                    $response = array(
-                        'status' => 'success',
-                        'msg' => 'Message Broadcasted.'
-                    );
+                    $response = View::make('partials.remove_up_vote')->with('up_vote', $up_vote);
+                    return $response;
+                    /* $response = array( */
+                    /*     'status' => 'success', */
+                    /*     'msg' => 'Message Broadcasted.' */
+                    /* ); */
                 }
                 else
                     {
@@ -131,7 +133,10 @@ class UpVotesController extends \BaseController {
             ) );
         }
         $v = UpVote::find(Input::get('up_vote_id'));
+        $message = $v->message;
+        $response = View::make('partials.up_vote')->with('message', $message);
         $v->delete();
+        return $response;
 
      //
     }

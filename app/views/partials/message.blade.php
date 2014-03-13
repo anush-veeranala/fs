@@ -31,41 +31,29 @@
           @endif
           <span class="upvote-count"> {{ UpVote::upvote_count($message->id) }} </span>
           @if ($up_vote === NULL)
-            {{ Form::open(array(
-                'route' => 'up_votes.store',
-                'method' => 'post',
-                'class' => 'up-vote'
-              )) }}
-            {{ Form::hidden('message_id', $message->id) }}
-            {{ Form::submit('Up Vote') }}
-            {{ Form::close() }}
+            <?php
+            $data['message'] = $message;
+            echo View::make('partials.up_vote', $data);
+            ?>
           @else
-            {{ Form::open(array('route' => 'up_votes.destroy',
-                                'method' => 'delete',
-                                'class' => 'remove-up-vote')) }}
-            {{ Form::hidden('up_vote_id', $up_vote->id) }}
-            {{ Form::submit('UP VOTED') }}
-            {{ Form::close() }}
+            <?php
+            $data['up_vote'] = $up_vote;
+            echo View::make('partials.remove_up_vote', $data);
+            ?>
           @endif
           @if ($down_vote = DownVote::user_downvote($message->id))
           @endif
           <span class="downvote-count"> {{ DownVote::downvote_count($message->id) }} </span>
           @if ($down_vote === NULL)
-            {{ Form::open(array(
-                'route' => 'down_votes.store',
-                'method' => 'post',
-                'class' => 'down-vote'
-              )) }}
-            {{ Form::hidden('message_id', $message->id) }}
-            {{ Form::submit('Down Vote') }}
-            {{ Form::close() }}
+            <?php
+            $data['message'] = $message;
+            echo View::make('partials.down_vote', $data);
+            ?>
           @else
-            {{ Form::open(array('route' => 'down_votes.destroy',
-                                'method' => 'delete',
-                                'class' => 'remove-down-vote')) }}
-            {{ Form::hidden('down_vote_id', $down_vote->id) }}
-            {{ Form::submit('DOWN VOTED') }}
-            {{ Form::close() }}
+            <?php
+            $data['down_vote'] = $down_vote;
+            echo View::make('partials.remove_down_vote', $data);
+            ?>
           @endif
         @endif
         @if ($saved = Favourite::user_favourite($message->id))
