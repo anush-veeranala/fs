@@ -106,9 +106,10 @@ jQuery( document ).ready( function( $ ) {
                 // "setting_value": $( '#setting_value' ).val()
             },
             function( data ) {
+                $("div.messages").prepend(data);
                 //do something with data/response returned by server
             },
-            'json'
+            'html'
         );
         //.....
         //do anything else you might want to do
