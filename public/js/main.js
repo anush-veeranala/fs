@@ -123,12 +123,13 @@ jQuery( document ).ready( function( $ ) {
 
     } );
 
-    $( '.up-vote' ).on( 'submit', function() {
+    $( document ).on( 'submit','.up-vote', function() {
 
         //.....
         //show some spinner etc to indicate operation in progress
         //.....
-
+        var form = $(this);
+        var upvoteCount = $($(this).siblings("span.upvote-count")[0]);
         $.post(
             $( this ).prop( 'action' ),
             {
@@ -137,9 +138,11 @@ jQuery( document ).ready( function( $ ) {
                 // "setting_value": $( '#setting_value' ).val()
             },
             function( data ) {
+                form.replaceWith(data);
+                upvoteCount.text(parseInt(upvoteCount.text()) + 1);
                 //do something with data/response returned by server
             },
-            'json'
+            'html'
         );
 
         //.....
@@ -150,12 +153,13 @@ jQuery( document ).ready( function( $ ) {
         return false;
     } );
 
-    $( '.remove-up-vote' ).on( 'submit', function() {
+    $( document ).on( 'submit', '.remove-up-vote' ,function() {
 
         //.....
         //show some spinner etc to indicate operation in progress
         //.....
-
+        var form = $(this);
+        var upvoteCount = $($(this).siblings("span.upvote-count")[0]);
         $.ajax({
             url: $( this ).prop( 'action' ),
             type: "DELETE",
@@ -165,6 +169,8 @@ jQuery( document ).ready( function( $ ) {
                 // "setting_value": $( '#setting_value' ).val()
             },
             success: function(result) {
+                form.replaceWith(result);
+                upvoteCount.text(parseInt(upvoteCount.text()) - 1);
                 // Do something with the result
             }
         });
@@ -190,12 +196,13 @@ jQuery( document ).ready( function( $ ) {
         return false;
     } );
 
-    $( '.down-vote' ).on( 'submit', function() {
+    $( document ).on( 'submit', '.down-vote' ,function() {
 
         //.....
         //show some spinner etc to indicate operation in progress
         //.....
-
+        var form = $(this);
+        var downvoteCount = $($(this).siblings("span.downvote-count")[0]);
         $.post(
             $( this ).prop( 'action' ),
             {
@@ -204,9 +211,11 @@ jQuery( document ).ready( function( $ ) {
                 // "setting_value": $( '#setting_value' ).val()
             },
             function( data ) {
+                form.replaceWith(data);
+                downvoteCount.text(parseInt(downvoteCount.text()) + 1);
                 //do something with data/response returned by server
             },
-            'json'
+            'html'
         );
 
         //.....
@@ -217,12 +226,13 @@ jQuery( document ).ready( function( $ ) {
         return false;
     } );
 
-    $( '.remove-down-vote' ).on( 'submit', function() {
+    $( document ).on( 'submit', '.remove-down-vote' ,function() {
 
         //.....
         //show some spinner etc to indicate operation in progress
         //.....
-
+        var form = $(this);
+        var downvoteCount = $($(this).siblings("span.downvote-count")[0]);
         $.ajax({
             url: $( this ).prop( 'action' ),
             type: "DELETE",
@@ -232,6 +242,8 @@ jQuery( document ).ready( function( $ ) {
                 // "setting_value": $( '#setting_value' ).val()
             },
             success: function(result) {
+                form.replaceWith(result);
+                downvoteCount.text(parseInt(downvoteCount.text()) - 1);
                 // Do something with the result
             }
         });
@@ -245,7 +257,7 @@ jQuery( document ).ready( function( $ ) {
         return false;
     } );
 
-    $( '.add-favourite' ).on( 'submit', function() {
+    $( document ).on( 'submit', '.add-favourite' ,function() {
 
         //.....
         //show some spinner etc to indicate operation in progress
