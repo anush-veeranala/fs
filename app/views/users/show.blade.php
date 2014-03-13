@@ -1,4 +1,5 @@
 <div class="hide" id="message-form-popup">
+  <a id="close">X</a>
   {{Form::open(array(
       'route' => "messages.store",
       'method' => 'post',
@@ -16,7 +17,7 @@
 </div>
 
 <ul id="sidebar">
-  <li id="message-form-show">Broadcast Message</li>
+  <li id="message-form-show" rel="#message-form-popup">Broadcast Message</li>
   <li> {{ HTML::link('users/saved', 'Saved Messages') }} </li>
   <li>
     {{ Form::open(array('route' => 'sessions.destroy', 'method' => 'delete')) }}
