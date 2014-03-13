@@ -48,11 +48,18 @@ class CommentsController extends \BaseController {
                 $message = Message::find(Input::get('message_id'));
                 $comment->message()->associate($message);
                 $comment->save();
-                $response = array(
-                    'status' => 'success',
-                    'msg' => $comment->created_at
-                    /* 'msg' => 'Setting created successfully', */
-                );
+                /* $response = array( */
+                /*     'status' => 'success', */
+                /*     'msg' => $comment->created_at */
+                /*     /\* 'msg' => 'Setting created successfully', *\/ */
+                /* ); */
+                $response_broadcast = View::make('partials.comment')->with('comment', $comment);
+                $context = new ZMQContext();
+                $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
+                $socket->connect("tcp://localhost:5555");
+
+                $socket->send($response_broadcast);
+                return $response_broadcast;
 
                 /* return Response::json( $response ); */
             }

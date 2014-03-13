@@ -262,7 +262,7 @@ jQuery( document ).ready( function( $ ) {
         //.....
         //show some spinner etc to indicate operation in progress
         //.....
-
+        var form = $(this);
         $.post(
             $( this ).prop( 'action' ),
             {
@@ -271,10 +271,10 @@ jQuery( document ).ready( function( $ ) {
                 // "setting_value": $( '#setting_value' ).val()
             },
             function( data ) {
-                $(".add-favourite").replaceWith(data);
+                form.replaceWith(data);
                 //do something with data/response returned by server
             },
-            'json'
+            'html'
         );
 
         //.....
@@ -285,12 +285,12 @@ jQuery( document ).ready( function( $ ) {
         return false;
     } );
 
-    $( '.remove-favourite' ).on( 'submit', function() {
+    $( document ).on( 'submit', '.remove-favourite' , function() {
 
         //.....
         //show some spinner etc to indicate operation in progress
         //.....
-
+        var form = $(this);
         $.ajax({
             url: $( this ).prop( 'action' ),
             type: "DELETE",
@@ -300,7 +300,7 @@ jQuery( document ).ready( function( $ ) {
                 // "setting_value": $( '#setting_value' ).val()
             },
             success: function(result) {
-                $(".remove-favourite").replaceWith(result);
+                form.replaceWith(result);
                 // alert(result);
                 // Do something with the result
             }

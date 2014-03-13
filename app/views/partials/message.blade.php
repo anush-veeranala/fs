@@ -91,22 +91,10 @@
     {{ Form::close() }}
   </div>
   @foreach($message->comments as $comment)
-    <div class="comment">
-      <div class="profile-pic">
-        {{ HTML::image('user.png')}}
-      </div>
-      <div class="comment-body">
-        <div class="id-time">
-          <span class="name">{{ $comment->user->name}}</span>
-          <span class="timeofcomment">
-            {{ $comment->created_at}}
-          </span>
-        </div>
-        <div class="comment-text">
-          {{ $comment->content }}
-        </div>
-      </div>
-    </div>
+    <?php
+    $data['comment'] = $comment;
+    echo View::make('partials.comment', $data);
+    ?>
   @endforeach
 </div>
 <div style="clear:both">

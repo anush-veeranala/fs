@@ -81,10 +81,10 @@ class MessagesController extends \BaseController {
                 $message->content = Input::get('content');
                 $message->user()->associate($user);
                 if ($message->save()){
-                    $response = array(
-                        'status' => 'success',
-                        'msg' => 'Message Broadcasted.'
-                    );
+                    /* $response = array( */
+                    /*     'status' => 'success', */
+                    /*     'msg' => 'Message Broadcasted.' */
+                    /* ); */
                     // This is our new stuff
                     $response_broadcast = View::make('partials.message')->with('message', $message);
                     $context = new ZMQContext();
