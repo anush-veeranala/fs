@@ -1,5 +1,5 @@
 <div class="whole-message">
-  <div class="message">
+  <div class="message {{$message->id}}  ">
     <div class="profile-pic
          @if ($message->user->admin)
          admin-profile

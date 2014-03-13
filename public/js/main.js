@@ -106,7 +106,7 @@ jQuery( document ).ready( function( $ ) {
                 // "setting_value": $( '#setting_value' ).val()
             },
             function( data ) {
-                $("div.messages").prepend(data);
+                // $("div.messages").prepend(data);
                 //do something with data/response returned by server
             },
             'html'
@@ -320,7 +320,7 @@ jQuery( document ).ready( function( $ ) {
         if ($(this).text()=="Hide Comments") {
             $(this).parents("div.message").siblings("div.comment").hide();
             $(this).text("Show Comments");
-        } 
+        }
         else{
             $(this).parents("div.message").siblings("div.comment").show();
             $(this).text("Hide Comments");
@@ -337,6 +337,7 @@ var conn = new ab.Session(
     , function() {            // Once the connection has been established
         conn.subscribe('resistance', function(topic, data) {
             // This is where you would add the new article to the DOM (beyond the scope of this tutorial)
+            $("div.messages").prepend(data);
 
             console.log('New article published to category "' + topic + '" : ' + data);
         });
