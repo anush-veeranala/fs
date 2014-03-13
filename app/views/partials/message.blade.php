@@ -76,13 +76,10 @@
           echo View::make('partials.save_message', $data);
           ?>
         @else
-          {{ Form::open(array('route' => 'favourites.destroy',
-                              'method' => 'delete',
-                              'class' => 'remove-favourite')) }}
-          {{ Form::hidden('favourite_id', $saved->id) }}
-          <!-- here -->
-          {{ Form::submit('Remove from saved') }}
-          {{ Form::close() }}
+          <?php
+          $data['saved'] = $saved;
+          echo View::make('partials.remove_saved_message', $data);
+          ?>
         @endif
         <span class="add-comment" rel="#{{$message->id}}">Add Comment</span>
         <span class="hide-comment">Hide Comments</span>

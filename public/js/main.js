@@ -251,6 +251,7 @@ jQuery( document ).ready( function( $ ) {
                 // "setting_value": $( '#setting_value' ).val()
             },
             function( data ) {
+                $(this).replaceWith(data);
                 //do something with data/response returned by server
             },
             'json'
@@ -279,6 +280,8 @@ jQuery( document ).ready( function( $ ) {
                 // "setting_value": $( '#setting_value' ).val()
             },
             success: function(result) {
+                $(".remove-favourite").replaceWith(result);
+                // alert(result);
                 // Do something with the result
             }
         });

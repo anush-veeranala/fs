@@ -48,10 +48,12 @@ class FavouritesController extends \BaseController {
                 $favourite->message()->associate($message);
 
                 if ($favourite->save()){
-                    $response = array(
-                        'status' => 'success',
-                        'msg' => 'Message Broadcasted.'
-                    );
+                    $response = View::make('partials.remove_saved_message')->with('saved', $favourite);
+                    return $response;
+                    /* $response = array( */
+                    /*     'status' => 'success', */
+                    /*     'msg' => 'Message Broadcasted.' */
+                    /* ); */
                 }
                 else
                     {
@@ -125,13 +127,16 @@ class FavouritesController extends \BaseController {
             ) );
         }
         $v = Favourite::find(Input::get('favourite_id'));
-        $response = array(
-            'status' => 'success',
-            'msg' => View::make('partials.save_message')->with('message', $v->message());
-        );
+        $message = $v->message;
+        $response = View::make('partials.save_message')->with('message', $message);
+        /* $response = array( */
+        /*     'status' => 'success', */
+        /*     'msg' => (String)View::make('partials.save_message', $data) */
+        /* ); */
 
         $v->delete();
-        return Response::json( $response );
+        return $response;
+        /* return Response::json( $response ); */
         //
     }
 
