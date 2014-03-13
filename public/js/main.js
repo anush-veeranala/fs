@@ -1,3 +1,8 @@
+function createComment(msg,date)
+{
+    var result = "<div class='comment'><div class='profile-pic'><img src='/user.png'></div><div class='comment-body'><div class='id-time'><span class='name'></span><span class='timeofcomment'>"+date+"</span></div><div class='comment-text'>"+msg+"</div></div></div>";
+      return result;
+}
 var All = {
 
 
@@ -52,10 +57,12 @@ var All = {
         });
         $('.add-comment-form').on('submit',function(e){
             var $elem = $(this).parent().parent().find('.add-comment');
+            var $parent = $(this).parent().parent();
             $elem.overlay().close();
+            var val = $(this).find('textarea').val();
             $.post(
                 $(this).prop('action'),$(this).serialize(), function(data) {
-
+                        $parent.append(createComment(val,data.msg.date));
                 }
             );
             return e.preventDefault();
@@ -293,6 +300,18 @@ jQuery( document ).ready( function( $ ) {
 
         //prevent the form from actually submitting in browser
         return false;
+    } );
+
+
+    $( 'span.hide-show-comment' ).on( 'click', function(){
+        if ($(this).text()=="Hide Comments") {
+            $(this).parents("div.message").siblings("div.comment").hide();
+            $(this).text("Show Comments");
+        } 
+        else{
+            $(this).parents("div.message").siblings("div.comment").show();
+            $(this).text("Hide Comments");
+        };
     } );
 
 

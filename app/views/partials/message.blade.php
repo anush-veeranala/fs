@@ -70,7 +70,7 @@
           ?>
         @endif
         <span class="add-comment" rel="#{{$message->id}}">Add Comment</span>
-        <span class="hide-comment">Hide Comments</span>
+        <span class="hide-show-comment">Hide Comments</span>
         <div></div>
       </div>
     </div>
@@ -108,5 +108,6 @@
       </div>
     </div>
   @endforeach
-  <div style="clear:both"/>
-  </div>
+</div>
+<div style="clear:both">
+</div>

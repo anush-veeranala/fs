@@ -132,11 +132,15 @@ div.message div.message-body div.upvotes-comments span.upvote-count, div.message
   margin-left: 10px;
   line-height: 25px;
 }
-div.message div.message-body div.upvotes-comments span.add-comment,div.message div.message-body div.upvotes-comments span.hide-comment, div.message div.message-body div.upvotes-comments span.save-message {
+div.message div.message-body div.upvotes-comments span.add-comment,div.message div.message-body div.upvotes-comments span.hide-show-comment, div.message div.message-body div.upvotes-comments span.save-message {
   float: right;
   margin-right: 10px;
   font-size: 14px;
   line-height: 25px;
+}
+div.message div.message-body div.upvotes-comments span.add-comment:hover,div.message div.message-body div.upvotes-comments span.hide-show-comment:hover{
+  cursor: pointer;
+  color: blue;
 }
 div.message div.message-body div.upvotes-comments form.add-favourite,div.message div.message-body div.upvotes-comments form.remove-favourite{
   float: right;
@@ -217,5 +221,9 @@ div.message div.admin-profile
 }
 
 #close {
+  cursor: pointer;
+}
+
+input[type='submit']:hover{
   cursor: pointer;
 }
