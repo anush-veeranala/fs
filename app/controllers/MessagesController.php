@@ -85,13 +85,16 @@ class MessagesController extends \BaseController {
                         'status' => 'success',
                         'msg' => 'Message Broadcasted.'
                     );
-                                            // This is our new stuff
-                        $context = new ZMQContext();
-                        $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
-                        $socket->connect("tcp://localhost:5555");
+                    // This is our new stuff
+                    $response_broadcast = View::make('partials.message')->with('message', $message);
+                    $context = new ZMQContext();
+                    $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
+                    $socket->connect("tcp://localhost:5555");
 
-                        $socket->send(json_encode($message->toJson()));
-
+                    $socket->send($response_broadcast);
+                    /* $socket->send(json_encode($message->toJson())); */
+                    return $response_broadcast;
+                    /* return $response; */
                 }
                 else
                     {
