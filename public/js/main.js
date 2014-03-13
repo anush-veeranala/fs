@@ -1,8 +1,3 @@
-function createComment(msg,date)
-{
-        var result = "<div class='comment'><div class='profile-pic'><img src='/user.png'></div><div class='comment-body'><div class='id-time'><span class='name'></span><span class='timeofcomment'>"+date+"</span></div><div class='comment-text'>"+msg+"</div></div></div>";
-          return result;
-}
 var All = {
 
 
