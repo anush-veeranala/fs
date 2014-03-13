@@ -72,7 +72,7 @@ class UsersController extends \BaseController {
 
     public function saved()
     {
-        $messages = Auth::user()->favourites;
+        $messages = Auth::user()->favourites()->orderBy('created_at', 'desc')->get();;
         /* dd($messages); */
         /* $vote_count = Vote::votescount(); */
         /* dd($messages); */
