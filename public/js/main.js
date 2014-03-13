@@ -1,3 +1,86 @@
+var All = {
+
+
+
+    // longpoll: function waitForMsg() {
+    //     /* This requests the url "msgsrv.php"
+    //        When it complete (or errors)*/
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/messages/checkin_poll",
+
+    //         async: true, /* If set to non-async, browser shows page as "Loading.."*/
+    //         cache: false,
+    //         timeout:50000, /* Timeout in ms */
+
+    //         success: function(data){ /* called when request to barge.php completes */
+    //             addmsg("new", data); /* Add response to a .msg div (with the "new" class)*/
+    //             setTimeout(
+    //                 waitForMsg, /* Request next message */
+    //                 1000 /* ..after 1 seconds */
+    //             );
+    //         },
+    //         error: function(XMLHttpRequest, textStatus, errorThrown){
+    //             addmsg("error", textStatus + " (" + errorThrown + ")");
+    //             setTimeout(
+    //                 waitForMsg, /* Try again after.. */
+    //                 15000); /* milliseconds (15seconds) */
+    //         }
+    //     });
+
+    // },
+
+
+    // newmessagepopup: function(){
+    //     $("#message-form-popup").show();
+    // },
+    initialize: function(){
+        // $(document).on("click", "#message-form-show", All.newmessagepopup);
+        // All.longpoll();
+        $('#close').on('click',function(e){
+            triggers.eq(0).overlay().close();
+        });
+        $('.close').on('click',function(e){
+            var $elem = $(this);
+            $elem.parent().parent().find('.add-comment').overlay().close();
+        });
+
+        var triggers = $('#message-form-show').overlay({
+            mask: {
+                color: '#ccc',
+                top: 100
+            },
+            closeOnClick:false
+        });
+        $('.add-comment').overlay({
+            mask: {
+                color: '#ccc',
+                top: 100
+            },
+            closeOnClick: false
+        });
+        $('.add-comment-form').on('submit',function(e){
+            var $elem = $(this).parent().parent().find('.add-comment');
+            $elem.overlay().close();
+            $.post(
+                $(this).prop('action'),$(this).serialize(), function(data) {
+
+                }
+            );
+            return e.preventDefault();
+        });
+
+    }
+
+}
+
+
+init = function(){
+    All.initialize();
+}
+
+$(document).ready(init);
+
 jQuery( document ).ready( function( $ ) {
 
     $( '#message-form' ).on( 'submit', function() {
@@ -26,8 +109,8 @@ jQuery( document ).ready( function( $ ) {
         //prevent the form from actually submitting in browser
         // alert("came here");
         // return false;
-        return defaultPrevented();
-        // return e.preventDefault();
+        // return defaultPrevented();
+        return e.preventDefault();
 
     } );
 
@@ -212,88 +295,6 @@ jQuery( document ).ready( function( $ ) {
 
 } );
 
-var All = {
-
-
-
-    // longpoll: function waitForMsg() {
-    //     /* This requests the url "msgsrv.php"
-    //        When it complete (or errors)*/
-    //     $.ajax({
-    //         type: "GET",
-    //         url: "/messages/checkin_poll",
-
-    //         async: true, /* If set to non-async, browser shows page as "Loading.."*/
-    //         cache: false,
-    //         timeout:50000, /* Timeout in ms */
-
-    //         success: function(data){ /* called when request to barge.php completes */
-    //             addmsg("new", data); /* Add response to a .msg div (with the "new" class)*/
-    //             setTimeout(
-    //                 waitForMsg, /* Request next message */
-    //                 1000 /* ..after 1 seconds */
-    //             );
-    //         },
-    //         error: function(XMLHttpRequest, textStatus, errorThrown){
-    //             addmsg("error", textStatus + " (" + errorThrown + ")");
-    //             setTimeout(
-    //                 waitForMsg, /* Try again after.. */
-    //                 15000); /* milliseconds (15seconds) */
-    //         }
-    //     });
-
-    // },
-
-
-    // newmessagepopup: function(){
-    //     $("#message-form-popup").show();
-    // },
-    initialize: function(){
-        // $(document).on("click", "#message-form-show", All.newmessagepopup);
-        // All.longpoll();
-        $('#close').on('click',function(e){
-            triggers.eq(0).overlay().close();
-        });
-        $('.close').on('click',function(e){
-            var $elem = $(this);
-            $elem.parent().parent().find('.add-comment').overlay().close();
-        });
-
-        var triggers = $('#message-form-show').overlay({
-            mask: {
-                color: '#ccc',
-                top: 100
-            },
-            closeOnClick:false
-        });
-        $('.add-comment').overlay({
-            mask: {
-                color: '#ccc',
-                top: 100
-            },
-            closeOnClick: false
-        });
-        $('.add-comment-form').on('submit',function(e){
-            var $elem = $(this).parent().parent().find('.add-comment');
-            $elem.overlay().close();
-            $.post(
-                $(this).prop('action'),$(this).serialize(), function(data) {
-
-                }
-            );
-            return e.preventDefault();
-        });
-
-    }
-
-}
-
-
-init = function(){
-    All.initialize();
-}
-
-$(document).ready(init);
 
 var conn = new ab.Session(
     'ws://localhost:8080' // The host (our Ratchet WebSocket server) to connect to

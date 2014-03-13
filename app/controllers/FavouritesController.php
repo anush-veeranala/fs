@@ -125,8 +125,13 @@ class FavouritesController extends \BaseController {
             ) );
         }
         $v = Favourite::find(Input::get('favourite_id'));
-        $v->delete();
+        $response = array(
+            'status' => 'success',
+            'msg' => View::make('partials.save_message')->with('message', $v->message());
+        );
 
+        $v->delete();
+        return Response::json( $response );
         //
     }
 
