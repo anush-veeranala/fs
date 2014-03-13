@@ -190,6 +190,8 @@ div.comment div.comment-body div.comment-text {
   clear: both;
   width: 420px;
   padding: 10px;
+  overflow: hidden;
+  word-break: break-word;
 }
 .hide {
     background-color:#fff;
